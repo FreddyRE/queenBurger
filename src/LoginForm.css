@@ -1,0 +1,10 @@
+.ui.center.aligned.grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.ui.center.aligned.grid>div {
+    width: 30%;
+}
