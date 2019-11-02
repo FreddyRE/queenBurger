@@ -2,9 +2,17 @@ import React from 'react'
 
 class Card extends React.Component {
 
+    state = {divSelected:''}
+
     render() {
         return(
-            <div className="ui centered card">
+            <div className="ui centered card"
+                onClick = {()=>{
+                    this.setState({divSelected:this.props.title}, ()=>{
+                        this.props.onSelectedItem(this.state)
+                    }) 
+                }}
+            >
                 <div className="image">
                     <img src={this.props.img}/>
                 </div>

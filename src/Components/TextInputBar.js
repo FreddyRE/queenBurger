@@ -55,8 +55,10 @@ class TextInputBar extends React.Component{
                         onBlur={this._onBlur}
                         onClick = {this._onClick}
 
-                    />
+                    /> 
+                    {this.props.children}
                 </div>
+                
             </div>
         )
 
