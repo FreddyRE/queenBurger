@@ -7,8 +7,8 @@ const tagForUserNameField = "1_1"
 
 class App extends React.Component {
     state = {
-        'goToMainMenu':false, 
-        'goToLogin' : true
+        'goToMainMenu':true, 
+        'goToLogin' : false
     }
     
     renderHelper = () => {
