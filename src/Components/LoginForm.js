@@ -20,6 +20,9 @@ var firebaseConfig = {
 
 
 var settingsInputsBar = {
+    
+    classNameModalLogin : 'modal-login',
+    
     bar1 : {
         name : "userName",
         id : "userNameInput",
@@ -45,7 +48,8 @@ class LoginForm extends React.Component{
         isUserNameCorrect:false, 
         userNameCorrect: "", 
         dataForCheckOnSubmit:'',
-        signed : false 
+        signed : false,
+        modalClassName: settingsInputsBar.classNameModalLogin
     }
     
 
@@ -84,6 +88,7 @@ class LoginForm extends React.Component{
                 firebase.database().ref(`users/${this.state.userNameCorrect}`).once("value").then((snapshot)=>{
                     if(snapshot.val().pass === this.state.dataForCheckOnSubmit){
                         this.setState({signed:true})
+                        this.props.logginHande(this.state)
                     } else {
                         alert("favor de verificar el password")
                     }
@@ -98,7 +103,7 @@ class LoginForm extends React.Component{
     render() {
 
         return (
-            <div className="ui center aligned grid">
+            <div className={`ui center aligned grid ${settingsInputsBar["classNameModalLogin"]}`}>
             <div className="column">
                 <h2 className="ui teal image header">
                     <div className="content">Ingreso</div>
