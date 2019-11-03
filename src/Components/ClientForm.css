@@ -1,10 +1,15 @@
-.field {
+.ui.left.icon.input {
+    width: 70%;
+}
+
+.client-form-wrapper {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
-.ui.left.icon.input {
-    width: 70%;
+.nombre-cliente {
+    width: 80%;
+    text-align: center;
 }

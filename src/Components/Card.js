@@ -5,8 +5,9 @@ class Card extends React.Component {
     state = {divSelected:''}
 
     render() {
+
         return(
-            <div className="ui centered card"
+            <div className={`ui centered card ${this.props.extraClass}`}
                 onClick = {()=>{
                     this.setState({divSelected:this.props.title}, ()=>{
                         this.props.onSelectedItem(this.state)
@@ -18,6 +19,9 @@ class Card extends React.Component {
                 </div>
                 <div className="content">
                     <a className="header">{this.props.title}</a>
+                </div>
+                <div className={`description ${this.props.extraClassDescription}`}>
+                    {this.props.description}
                 </div>
             </div>
         )

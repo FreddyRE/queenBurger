@@ -11,6 +11,7 @@ var settingsInputClient = {
         placeholder: "Nombre del cliente",
         iconName: "user",
         toUpperCase: true,
+        classNameExtra:"nombre-cliente"
     }
 
 }
@@ -42,12 +43,11 @@ class ClientForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="client-form-wrapper">
                 <TextInputBar 
-                settings = { settingsInputClient.bar1 }
-                onSubmit = { this.onSubmitField }
-                >
-                <TabBtn onClickElement={this.handleClick} />
+                    settings = { settingsInputClient.bar1 }
+                    onSubmit = { this.onSubmitField }>
+                    <TabBtn onClickElement={this.handleClick} />
                 </TextInputBar>
                 
             </div> 

@@ -11,6 +11,7 @@ class TextInputBar extends React.Component{
           errorClassName: undefined, 
           okClassName :props.settings.iconName,
           isTagToCheckInSubmit : ''
+
           
         }
 
@@ -37,7 +38,7 @@ class TextInputBar extends React.Component{
     }
     render() {
         return(
-            <div className={`field ${this.state.errorClassName}`}>
+            <div className={`field ${this.state.errorClassName} ${this.props.settings.classNameExtra}`}>
                 <div className="ui left icon input">
                     <i 
                         className={`${this.props.settings.iconName} icon`}>

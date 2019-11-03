@@ -14,3 +14,11 @@
     top: 15%;
     font-size: 40px;
 }
+
+.menu-card-main {
+    cursor: pointer;
+}
+
+.precio-items {
+    text-align: center;
+}

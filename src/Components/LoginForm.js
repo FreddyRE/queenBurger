@@ -95,7 +95,7 @@ class LoginForm extends React.Component {
                     </h2 > 
             
                     <form className = "ui large form" >
-                        <div className = "ui stacked segment" >
+                        <div className = "ui segment" >
                             <TextInputBar settings = { settingsInputsBar.bar1 }
                                 onSubmit = { this.onSubmitField }
                                 formNo = "1_1" />
