@@ -4,7 +4,6 @@ import LoginForm from './LoginForm'
 import MainMenu from './MainMenu'
 import ClientForm from './ClientForm'
 import ItemsFromMenu from './ItemsFromMenu'
-import ButtonAttached from "./ButtonAttached";
 
 var firebaseConfig = {
     apiKey: "AIzaSyCt4Dp2ItfTzxE2aZf_HDI__xY_rj6ywSg",
@@ -23,8 +22,8 @@ firebase.initializeApp(firebaseConfig);
 
 class App extends React.Component {
     state = {
-        'goToMainMenu':true, 
-        'goToLogin' : false,
+        'goToMainMenu':false, 
+        'goToLogin' : true,
         'goToClientName' : false,
         'goToItemsMenu' : false,
         'clientName' : 'TestName',
@@ -43,11 +42,18 @@ class App extends React.Component {
             return <ClientForm nameClientHandle={this.handleNameClient}/>
         }
         if(this.state.goToItemsMenu){
-            return <ItemsFromMenu items={this.state}/>
+            return <ItemsFromMenu items={this.state} handleItemReturn={this.handleItemReturnMenu}/>
         }
 
     }
 
+    handleItemReturnMenu = (prop) =>{
+
+        console.log(prop)
+        if(prop.goBackToMainMenu){
+            this.setState({goToItemsMenu:false, goToMainMenu:true})
+        }
+    }
 
     handleSelectMenu = (prop) =>{
         if(prop.itemsLoaded.length > 0){

@@ -6,4 +6,6 @@
 
 i.arrow.alternate.circle.left.icon.main-menu-go-back {
     cursor: pointer;
+    position: absolute;
+    top: 50%;
 }

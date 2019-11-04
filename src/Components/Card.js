@@ -2,13 +2,19 @@ import React from 'react'
 
 class Card extends React.Component {
 
-    state = {divSelected:''}
-
+    state = {divSelected:'', openModal:false}
+    onPerformItemSelection = (item)=>{
+        console.log(item)
+     }
     render() {
-
         return(
             <div className={`ui centered card ${this.props.extraClass}`}
                 onClick = {()=>{
+                    if(this.props.openModal){
+                        this.setState({openModal:true},()=>{
+
+                        })       
+                    }
                     this.setState({divSelected:this.props.title}, ()=>{
                         this.props.onSelectedItem(this.state)
                     }) 

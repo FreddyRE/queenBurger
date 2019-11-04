@@ -1,9 +1,9 @@
 import React from 'react'
 import Card from './Card'
 import firebase from 'firebase'
+import {Dropdown, Menu} from 'semantic-ui-react'
 import './MainMenu.css'
 import ModalMenu from './ModalMenu'
-
 import Modal from 'react-modal'
 
 
@@ -15,16 +15,37 @@ const keysForDB = {
 }
 Modal.setAppElement('#root')
 
-
 class MainMenu extends React.Component{
 
-    state = {'itemsLoaded':null, 'menu_name':undefined, modalChangeNameOpen:false, clientName:this.props.nameClient}
+    _isMounted = false 
+
+    componentDidMount(){
+        console.log("mounted")
+        this._isMounted = true
+    }
+
+    componentWillUnmount(){
+        console.log("unmount")
+        this._isMounted = false
+    }
+
+    state = {
+        'itemsLoaded':null, 
+        'menu_name':undefined, 
+        modalChangeNameOpen:false, 
+        clientName:this.props.nameClient,
+        addItemConfirmation:false,
+    }
 
     openModal = () =>{
         this.setState({modalChangeNameOpen: true}, ()=>{
         });
     }
    
+    onPerformItemSelection = (item)=>{
+       this.setState({addItemConfirmation:true})
+    }
+
 
     onPerformSelection =(data) =>{
         firebase.database().ref(`menus/${keysForDB.menus[data.divSelected]}`).once("value").then((snapshot) => {
@@ -33,13 +54,14 @@ class MainMenu extends React.Component{
             const newCards = namesMenu.map((elements, key)=>{
                 return(
                     <Card
-                    key = {key}
-                    extraClass = "menu-card-main" 
-                    img="./img/menu_main/desayuno.jpg" 
-                    title={elements.nombre_comercial}
-                    description = {`$${elements.precio} MXP`}
-                    extraClassDescription = "precio-items"
-                    onSelectedItem={this.onPerformItemSelection}
+                        key = {key}
+                        extraClass = "menu-card-main" 
+                        img="./img/menu_main/desayuno.jpg" 
+                        title={elements.nombre_comercial}
+                        description = {`$${elements.precio} MXP`}
+                        extraClassDescription = "precio-items"
+                        onSelectedItem={this.onPerformItemSelection}
+                        openModal = {true}
                     />
                 )
             })
@@ -59,7 +81,13 @@ class MainMenu extends React.Component{
     render() {
         return(
             <div className="menu-selector">
-                 <h3 className="ui block header">
+                <h3 className="ui block header main-interface">
+                        <Dropdown icon='plus square outline' direction='right' style={{color:'purple'}}>
+                            <Dropdown.Menu>
+                                <Dropdown.Item text='Checkout' />
+                                <Dropdown.Item text='Cerrar sesion' />
+                            </Dropdown.Menu>
+                        </Dropdown>                    
                 </h3>
                 <ModalMenu 
                     modalShouldOpen={this.state.modalChangeNameOpen} 
