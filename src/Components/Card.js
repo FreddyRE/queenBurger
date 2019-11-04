@@ -23,6 +23,8 @@ class Card extends React.Component {
                 <div className={`description ${this.props.extraClassDescription}`}>
                     {this.props.description}
                 </div>
+                {this.props.attachedButton}
+               
             </div>
         )
     }

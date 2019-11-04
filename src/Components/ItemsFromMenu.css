@@ -1,0 +1,9 @@
+.detail-menu-header {
+    text-align: center;
+    padding: 4%;
+    font-size: 50px;
+}
+
+i.arrow.alternate.circle.left.icon.main-menu-go-back {
+    cursor: pointer;
+}

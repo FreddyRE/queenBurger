@@ -28,7 +28,8 @@ class App extends React.Component {
         'goToClientName' : false,
         'goToItemsMenu' : false,
         'clientName' : 'TestName',
-        'componentFromMenu': undefined
+        'componentFromMenu': undefined,
+        'menuNameSelected':undefined
     }
     
     renderHelper = () => {
@@ -42,7 +43,7 @@ class App extends React.Component {
             return <ClientForm nameClientHandle={this.handleNameClient}/>
         }
         if(this.state.goToItemsMenu){
-            return <ItemsFromMenu items={this.state.componentFromMenu}/>
+            return <ItemsFromMenu items={this.state}/>
         }
 
     }
@@ -51,7 +52,7 @@ class App extends React.Component {
     handleSelectMenu = (prop) =>{
         if(prop.itemsLoaded.length > 0){
             this.setState({goToItemsMenu:true, goToMainMenu:false})
-            this.setState({componentFromMenu:prop.itemsLoaded})
+            this.setState({componentFromMenu:prop.itemsLoaded, menuNameSelected:prop.menu_name})
         }
     }
 

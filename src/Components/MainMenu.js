@@ -2,6 +2,10 @@ import React from 'react'
 import Card from './Card'
 import firebase from 'firebase'
 import './MainMenu.css'
+import ModalMenu from './ModalMenu'
+
+import Modal from 'react-modal'
+
 
 const keysForDB = {
     menus :{
@@ -9,11 +13,18 @@ const keysForDB = {
         "Menu Carta" : "carta"
     }
 }
+Modal.setAppElement('#root')
 
 
 class MainMenu extends React.Component{
 
-    state = {'itemsLoaded':null}
+    state = {'itemsLoaded':null, 'menu_name':undefined, modalChangeNameOpen:false, clientName:this.props.nameClient}
+
+    openModal = () =>{
+        this.setState({modalChangeNameOpen: true}, ()=>{
+        });
+    }
+   
 
     onPerformSelection =(data) =>{
         firebase.database().ref(`menus/${keysForDB.menus[data.divSelected]}`).once("value").then((snapshot) => {
@@ -28,20 +39,35 @@ class MainMenu extends React.Component{
                     title={elements.nombre_comercial}
                     description = {`$${elements.precio} MXP`}
                     extraClassDescription = "precio-items"
-                    onSelectedItem={this.onPerformSelection}/>
+                    onSelectedItem={this.onPerformItemSelection}
+                    />
                 )
             })
 
-            this.setState({itemsLoaded:newCards})
+            this.setState({itemsLoaded:newCards, menu_name:data.divSelected})
             this.props.handleSelection(this.state)
         })
 
     }
 
+    handleChangeName=(name)=>{
+        this.setState({clientName:name}, ()=>{
+            this.setState({modalChangeNameOpen:false})
+        })
+    }
+
     render() {
         return(
             <div className="menu-selector">
-                <div className="name-user">Orden de: {this.props.nameClient} </div>
+                 <h3 className="ui block header">
+                </h3>
+                <ModalMenu 
+                    modalShouldOpen={this.state.modalChangeNameOpen} 
+                    onChangeName = {this.handleChangeName}
+                    />
+                <div className="name-user">Orden de: <span
+                        onClick ={this.openModal}
+                    >{this.state.clientName}</span> </div>
                 <Card
                     extraClass = "menu-card-main" 
                     img="./img/menu_main/desayuno.jpg" 
